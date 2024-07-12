@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout_/plantilla :: cabecera-plantilla">
+        <title>[[#{index.titulo}]]</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section th:replace="layout_/plantilla::titulo-ppal-blog"></section>
+        <a th:href="@{/agregar}"> Crear Persona</a>
+        <h1>[[#{titulo.persona}]]</h1>
+        <div th:if="${listaPersonas != null and !listaPersonas.empty}">
+            <table border="2">
+                <tr>
+                    <th>[[#{index.nombre}]]</th>
+                    <th>[[#{index.apellido}]]</th>
+                    <th>[[#{index.email}]]</th>
+                    <th>[[#{index.contacto}]]</th>
+                    <th>[[#{index.boton.editar}]]</th>
+                    <th>[[#{index.boton.eliminar}]]</th>
+                </tr>
+                <tr th:each=" p: ${listaPersonas}">
+                    <td th:text="${p.nombre}"></td>
+                    <td th:text="${p.apellido}"></td>
+                    <td th:text="${p.email}"></td>
+                    <td th:text="${p.telefono}"></td>   
+                    <td>
+                        <a th:href="@{/editar/}+ ${p.id}" th:text="Editar"/></a>
+                    </td> 
+                    <td>
+                        <a th:href="@{/eliminar (id=${p.id})}" th:text="Eliminar"/></a>
+                    </td>
+                    
+                </tr>
+            </table>  
+            <section th:replace="layout_/plantilla::seccion-secundaria-blog"></section>
+        </div >
+        <div th:if="${listaPersonas == null or listaPersonas.empty}">
+            <p>Lista de personas está vacía</p>  
+        </div>
+        <br>
+        <footer th:replace="layout_/plantilla::pie-pagina-ppal"></footer>
+    </body>
+</html>

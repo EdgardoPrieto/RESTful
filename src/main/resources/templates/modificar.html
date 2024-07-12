@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="cabecera-plantilla">
+        <title>[[#{modificar.titulo}]]</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section th:replace="layout_/plantilla::seccion-secundaria-blog"></section>
+        <a th:href="@{/}">Ir a la pagina principal</a>
+        <br>
+        <form th:action="@{/guardar}" method="post" th:object="${persona}">
+            <input type="hidden" value="id" th:field="*{id}"/>
+            <label for="nombre">[[#{modificar.nombre}]]</label>
+            <input type="text" name="nombre" th:field="*{nombre}"><br> 
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Campo nombre es obligatorio</span>
+            <br>
+            <label for="apellido">[[#{modificar.apellido}]]</label>
+            <input type="text" name="apellido" th:field="*{apellido}"><br> 
+            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Campo apellido es obligatorio</span>
+            <br>
+            <label for="email">[[#{modificar.email}]]</label>
+            <input type="text" name="email" th:field="*{email}"><br> 
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Campo email es obligatorio</span>
+            <br>
+            <label for="telefono">[[#{modificar.contacto}]]</label>
+            <input type="text" name="telefono" th:field="*{telefono}"><br> 
+            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Campo telefono es obligatorio</span>
+            <br>
+            <input type="submit" name="guardar" value="guardar">
+        </form>
+    </body>
+</html>
